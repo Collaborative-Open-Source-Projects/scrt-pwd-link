@@ -1,6 +1,6 @@
 import { MongoClient } from "mongodb";
 
-const uri = process.env.MONGODB_URI
+const uri = 'mongodb+srv://${MONGODB_USER}:${MONGODB_PASS}@${MONGODB_CLUSTER}.cbrsy.mongodb.net/?retryWrites=true&w=majority&appName=${MONGODB_CLUSTER}'
 
 // check if uri is empty
 if (!uri) {
