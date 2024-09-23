@@ -14,7 +14,6 @@ export default function Home() {
 
   return (
     <div style={{ textAlign: 'center', marginTop: '50px' }}>
-      {/* <h2>Current Server Time: {serverTime}</h2> */}
       <h1>Enter Something</h1>
       <input
         type="text"
