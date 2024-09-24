@@ -1,15 +1,26 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function Home() {
-  const [inputValue, setInputValue] = useState('');
+  const [secret, setSecret] = useState('');
+  const [status, setStatus] = useState(null);
 
-  const handleButtonClick = () => {
-    alert(`You entered: ${inputValue}`);
-  };
+  const handleButtonClick = async (e) => {
 
-  const handleInputChange = (e) => {
-    setInputValue(e.target.value);
+    e.preventDefault();
+    
+    alert(`You entered: ${secret}`);
+    const response = await fetch('/api/encrypt', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ secret }),
+    });
+
+    const result = await response.json();
+    setStatus(result);
+    setSecret('');
   };
 
   return (
@@ -17,10 +28,11 @@ export default function Home() {
       <h1>Enter Something</h1>
       <input
         type="text"
-        value={inputValue}
-        onChange={handleInputChange}
+        value={secret}
+        onChange={(e) => setSecret(e.target.value)}
         placeholder="Type here"
         style={{ padding: '10px', width: '300px', marginBottom: '20px' }}
+        required
       />
       <br />
       <button
@@ -35,6 +47,15 @@ export default function Home() {
       >
         Submit
       </button>
+      {status && (
+        <div>
+          {status.success ? (
+            <p style={{ color: 'green' }}>{status.message}</p>
+          ) : (
+            <p style={{ color: 'red' }}>{status.message}</p>
+          )}
+        </div>
+      )}
     </div>
   );
 }
