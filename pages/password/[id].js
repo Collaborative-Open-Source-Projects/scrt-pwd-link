@@ -1,14 +1,14 @@
 import clientPromise from "@/app/lib/mongodb";
-
+import { decrypt } from "@/app/utils/decrpyt";
 export async function getServerSideProps({ params }) {
   const { id } = params;
 
   // Connect to MongoDB
   const client = await clientPromise;
-  const db = client.db('scrt-pwd-data');
+  const db = client.db("scrt-pwd-data");
 
   // Fetch the encrypted password using the ID
-  const record = await db.collection('scrt-pwd-data').findOne({ id });
+  const record = await db.collection("scrt-pwd-data").findOne({ id });
 
   if (!record) {
     return {
@@ -18,7 +18,12 @@ export async function getServerSideProps({ params }) {
 
   return {
     props: {
-      password: record.secret,
+      password: record.encryptedSecret
+        ? decrypt(
+            record.encryptedSecret.encryptedData,
+            record.encryptedSecret.iv
+          )
+        : "",
     },
   };
 }
