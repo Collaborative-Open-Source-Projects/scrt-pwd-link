@@ -1,5 +1,6 @@
 import clientPromise from "@/app/lib/mongodb";
 import { encrypt } from "@/app/utils/encrypt";
+import { v4 as uuidv4 } from 'uuid';
 
 export default async function handler(req, res) {
     const client = await clientPromise;
@@ -9,13 +10,19 @@ export default async function handler(req, res) {
     if (req.method === 'POST') {
         try {
             const { secret } = req.body;
+            const id = uuidv4();
 
             if (!secret) {
                 return res.status(400).json({success: false, message: 'Secret is required'});
             }
 
             const encryptedSecret = encrypt(secret);
-            const result = await collection.insertOne({secret, encryptedSecret});
+            await collection.insertOne({
+                secret, 
+                encryptedSecret, 
+                id, 
+                createdAt: new Date(),
+            });
 
             res.status(200).json({success: true, message: 'Secret encrypted and added successfully!'});
         }
