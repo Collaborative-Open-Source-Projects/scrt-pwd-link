@@ -31,7 +31,7 @@ export default function Home() {
         value={secret}
         onChange={(e) => setSecret(e.target.value)}
         placeholder="Type here"
-        style={{ padding: '10px', width: '300px', marginBottom: '20px' }}
+        style={{ padding: '10px', width: '300px', marginBottom: '20px', color:'black' }}
         required
       />
       <br />
