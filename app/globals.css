@@ -25,3 +25,11 @@ body {
     text-wrap: balance;
   }
 }
+@media (max-width: 640px) {
+  #nav-desktop-view {
+    display: none;
+  }
+}
+#nav-container {
+  box-shadow: 0px 0px 10px black;
+}
