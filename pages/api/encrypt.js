@@ -24,7 +24,9 @@ export default async function handler(req, res) {
                 createdAt: new Date(),
             });
 
-            res.status(200).json({success: true, message: 'Secret encrypted and added successfully!'});
+            const link = `https://secret-pwd-link.vercel.app/password/${id}`;
+
+            res.status(200).json({success: true, link: link});
         }
         catch (error) {
             console.error(error);

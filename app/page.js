@@ -50,7 +50,7 @@ export default function Home() {
       {status && (
         <div>
           {status.success ? (
-            <p style={{ color: 'green' }}>{status.message}</p>
+            <p style={{ color: 'green' }}>{status.link}</p>
           ) : (
             <p style={{ color: 'red' }}>{status.message}</p>
           )}
