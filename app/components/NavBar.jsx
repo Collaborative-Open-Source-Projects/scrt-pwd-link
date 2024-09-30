@@ -1,4 +1,5 @@
 import Link from "next/link";
+import ToggleThemeSwitch from "./toggleSwitches/ToggleThemeSwitch.jsx";
 
 export const NavBar = () => {
   return (
@@ -40,6 +41,7 @@ export const NavBar = () => {
           <button className=" h-[36px] px-4 rounded bg-white hover:bg-white/90 text-teal-600">
             Register
           </button>
+			<ToggleThemeSwitch />
         </div>
       </nav>
     </div>
