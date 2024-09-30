@@ -25,11 +25,31 @@ body {
     text-wrap: balance;
   }
 }
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   #nav-desktop-view {
     display: none;
   }
 }
 #nav-container {
   box-shadow: 0px 0px 10px black;
+}
+
+.mobile-menu {
+  height: 36px;
+  width: 36px;
+  margin: 0px;
+  background-color: white;
+  position: relative;
+}
+
+.mobile-menu::after {
+  content: "";
+  width: 18px;
+  height: 10px;
+  position: absolute;
+  border: black solid;
+  border-width: 2px 0px 2px 0px;
+  top: 50%;
+  left: 50%;
+  translate: -9px -5px;
 }
