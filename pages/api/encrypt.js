@@ -7,6 +7,7 @@ export default async function handler(req, res) {
     const db = client.db('scrt-pwd-data');
     const collection = db.collection('scrt-pwd-data');
 
+
     if (req.method === 'POST') {
         try {
             const { secret } = req.body;
@@ -17,12 +18,21 @@ export default async function handler(req, res) {
             }
 
             const encryptedSecret = encrypt(secret);
-            await collection.insertOne({
-                secret, 
-                encryptedSecret, 
-                id, 
-                createdAt: new Date(),
-            });
+            const expirationTime = 7 * 24 * 60 * 60 * 1000;
+            const createdAt = new Date();
+            const expiresAt = new Date(createdAt.getTime() + expirationTime);
+            const encryptionKey = null;
+
+            const secret_store = {
+                secret_text: secret,
+                encryptedSecret: encryptedSecret,
+                id: id,
+                createdAt: createdAt,
+                expiresAt: expiresAt,
+                key: encryptionKey,
+            };
+
+            await collection.insertOne(secret_store);
 
             const link = `https://secret-pwd-link.vercel.app/password/${id}`;
 

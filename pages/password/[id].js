@@ -16,8 +16,23 @@ export async function getServerSideProps({ params }) {
     };
   }
 
+  const currentTime = new Date();
+  const expiryTime = new Date(record.expiresAt);
+
+  // Check if the record has expired
+  if (currentTime > expiryTime) {
+    return {
+      props: {
+        expired: true,
+        password: null,
+      },
+    };
+  }
+
+
   return {
     props: {
+      expired: false,
       password: record.encryptedSecret
         ? decrypt(
             record.encryptedSecret.encryptedData,
@@ -28,7 +43,15 @@ export async function getServerSideProps({ params }) {
   };
 }
 
-export default function PasswordPage({ password }) {
+export default function PasswordPage({ password, expired }) {
+  if (expired) {
+    return (
+      <div>
+        <h1>This link has expired</h1>
+        <p>The secret password is no longer available.</p>
+      </div>
+    );
+  }
   return (
     <div>
       <h1>Your Secret Password is:</h1>
