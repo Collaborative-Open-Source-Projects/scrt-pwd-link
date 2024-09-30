@@ -33,7 +33,7 @@ function ToggleThemeSwitch(){
 	}
 
 	return(
-		<div className={`toggle-theme-switch ${isDarkMode ? 'dark-theme' : null }`} onClick={toggle}>
+		<div className={`toggle-theme-switch ${isDarkMode ? 'dark-theme' : null } ml-2`} onClick={toggle}>
 		</div>
 	);
 }
