@@ -46,9 +46,9 @@ export const NavBar = () => {
               Register
             </button>
           </Link>
-          <DropDownMenu />
-          <ToggleThemeSwitch />
         </div>
+        <DropDownMenu />
+        <ToggleThemeSwitch />
       </nav>
     </div>
   );
