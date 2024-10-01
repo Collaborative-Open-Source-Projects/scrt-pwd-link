@@ -17,6 +17,7 @@ export default function Input({
   isRequired = false,
   type = "text",
   isDisabled = false,
+  name,
 }) {
   return (
     <div className={`${width}`}>
@@ -25,6 +26,7 @@ export default function Input({
       </label>
       <input
         type={type}
+        name={name}
         disabled={isDisabled}
         required={isRequired}
         onChange={(e) => onChange(e)}
