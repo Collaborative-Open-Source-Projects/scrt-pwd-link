@@ -1,0 +1,63 @@
+"use client";
+import drop from "./icons/drop.png";
+import Image from "next/image";
+import { useState } from "react";
+/* 
+    This reusable component for dropmenu , it takes 3 props
+    1- options for dropmenu
+    2- onSelect method that takes option as parameter
+    3- SelectedValue is the default value of dropmenu
+    4- width for different screen sizes
+    5- name of the dropmenu to access it in forms 
+*/
+export default function Dropmenu({
+  options = ["Option 1", "Option 2", "Option 3", "Option 4", "Option 5"],
+  onSelect,
+  SelectedValue = "Select",
+  width = "w-[120px]",
+  name = "dropmenu",
+}) {
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState(SelectedValue);
+  function handleSelect(option) {
+    if (open) {
+      setOpen(false);
+    }
+    setValue(option);
+    onSelect(option);
+  }
+  return (
+    <div className={`${width} inline-block relative `}>
+      <button
+        onClick={() => setOpen((prev) => !prev)}
+        className="bg-white shadow-xl text-start h-10 rounded-md w-full relative text-gray-500  py-2 px-2 border  hover:border-gray-600"
+      >
+        {value}
+        <Image
+          src={drop}
+          alt="drop"
+          width={15}
+          height={15}
+          className="absolute right-2 top-1/2 transform -translate-y-1/2"
+        />
+      </button>
+      <ul
+        className={`${
+          open ? "block" : "hidden"
+        } absolute shadow-2xl rounded-md w-full bg-white rounded-t-none border-gray-400 hover:border-gray-600`}
+      >
+        {options.map((option) => (
+          <li
+            key={option}
+            className="text-centers cursor-pointer py-2 px-2 hover:bg-gray-200"
+            onClick={() => handleSelect(option)}
+          >
+            {option}
+          </li>
+        ))}
+      </ul>
+      {/* this hidden input takes the current value , so if we use formdata or similar thing we can access to it with name  */}
+      <input type="hidden" value={value} name={name} />
+    </div>
+  );
+}
