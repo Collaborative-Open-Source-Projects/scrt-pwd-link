@@ -5,7 +5,6 @@
  4- placeholder
  5- onChange method that takes event as parameter
  6- is Required
- 7- type of the input ( text , password , number ,.... )
 */
 export default function Input({
   width = "w-3/4",
@@ -14,7 +13,6 @@ export default function Input({
   placeholder,
   onChange,
   isRequired = false,
-  type = "text",
 }) {
   return (
     <div className={`${width}`}>
@@ -22,7 +20,6 @@ export default function Input({
         {label}
       </label>
       <input
-        type={type}
         required={isRequired}
         onChange={(e) => onChange(e)}
         placeholder={placeholder}
