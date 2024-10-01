@@ -4,6 +4,7 @@
  3- label for input
  4- placeholder
  5- onChange method that takes event as parameter
+ 6- is Required
 */
 export default function Input({
   width = "w-3/4",
@@ -11,6 +12,7 @@ export default function Input({
   label,
   placeholder,
   onChange,
+  isRequired = false,
 }) {
   return (
     <div className={`${width}`}>
@@ -18,6 +20,7 @@ export default function Input({
         {label}
       </label>
       <input
+        required={isRequired}
         onChange={(e) => onChange(e)}
         placeholder={placeholder}
         className={`${
