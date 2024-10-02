@@ -1,4 +1,6 @@
 import Link from "next/link";
+import Image from "next/image";
+import Logo from "@/public/images/company-logo.svg";
 import { DropDownMenu } from "./DropDownMenu";
 import ToggleThemeSwitch from "./toggleSwitches/ToggleThemeSwitch.jsx";
 
@@ -7,12 +9,7 @@ export const NavBar = () => {
     <div className="sticky top-0" id="nav-container">
       <nav className="w-[86%] md:w-[66%] h-[64px] mb-2 mx-auto backdrop-blur-sm    flex  items-center">
         <Link href={"/"}>
-          <img
-            src="/images/company-logo.svg"
-            alt="company-logo"
-            width={"42px"}
-            height={"42px"}
-          />
+          <Image src={Logo} alt="company-logo" width={"42px"} height={"42px"} />
         </Link>
 
         <ul
