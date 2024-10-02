@@ -20,6 +20,7 @@ export const Register = ({ isAlreadyUser, setAlreadyUser }) => {
               name="emailAddress"
               id="emailAddress"
               required
+              autoComplete="off"
             />
           </div>
         </label>
@@ -33,6 +34,7 @@ export const Register = ({ isAlreadyUser, setAlreadyUser }) => {
               placeholder="Create username"
               name="username"
               id="userName"
+              autoComplete="off"
             />
             <span className="text-teal-600 cursor-pointer "> CHECK</span>
           </div>
@@ -48,6 +50,7 @@ export const Register = ({ isAlreadyUser, setAlreadyUser }) => {
               placeholder="Password"
               name="password"
               id="password"
+              autoComplete="off"
             />
             <span
               className="cursor-pointer text-teal-600 "
@@ -67,6 +70,7 @@ export const Register = ({ isAlreadyUser, setAlreadyUser }) => {
               placeholder="Password"
               name="cnfmPassword"
               id="cnfmPassword"
+              autoComplete="off"
             />
             <span
               className="cursor-pointer text-teal-600 "
