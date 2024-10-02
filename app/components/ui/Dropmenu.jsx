@@ -12,7 +12,7 @@ import { useState } from "react";
 */
 export default function Dropmenu({
   options = ["Option 1", "Option 2", "Option 3", "Option 4", "Option 5"],
-  onSelect,
+  onSelect = () => {},
   SelectedValue = "Select",
   width = "w-[120px]",
   name = "dropmenu",
@@ -27,10 +27,10 @@ export default function Dropmenu({
     onSelect(option);
   }
   return (
-    <div className={`${width} inline-block relative `}>
+    <div className={`${width} inline-block relative  `}>
       <button
         onClick={() => setOpen((prev) => !prev)}
-        className="bg-white shadow-xl text-start h-10 rounded-md w-full relative text-gray-500  py-2 px-2 border  hover:border-gray-600"
+        className=" bg-[color:var(--input-color)] shadow-xl text-start h-10 rounded-md w-full relative text-gray-500  py-2 px-2   "
       >
         {value}
         <Image
@@ -44,12 +44,12 @@ export default function Dropmenu({
       <ul
         className={`${
           open ? "block" : "hidden"
-        } absolute shadow-2xl rounded-md w-full bg-white rounded-t-none border-gray-400 hover:border-gray-600`}
+        } absolute shadow-2xl rounded-md w-full rounded-t-none bg-[color:var(--input-color)] `}
       >
         {options.map((option) => (
           <li
             key={option}
-            className="text-centers cursor-pointer py-2 px-2 hover:bg-gray-200"
+            className="text-centers cursor-pointer py-2 px-2 hover:bg-[color:var(--secondry-input)]"
             onClick={() => handleSelect(option)}
           >
             {option}
