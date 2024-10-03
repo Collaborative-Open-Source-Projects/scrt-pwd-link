@@ -1,0 +1,25 @@
+.toggle-theme-switch{
+	width: 40px;
+	height: 24px;
+	position: relative;
+	border-radius: 30px;
+	background-color: var(--foreground);
+	cursor: pointer;
+}
+
+.toggle-theme-switch:before {
+	content: "";
+	width: 18px;
+	height: 18px;
+	position: absolute;
+	top: 50%;
+	left: 0;
+	border-radius: 30px;
+	background-color: var(--primary-color);
+	transform: translate(4px, -50%);
+	transition: transform 200ms;
+}
+
+.toggle-theme-switch.dark-theme:before {
+	transform: translate(18px, -50%);
+}

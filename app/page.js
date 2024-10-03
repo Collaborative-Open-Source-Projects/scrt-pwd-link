@@ -1,58 +1,54 @@
-'use client';
-import { useState, useEffect } from 'react';
-
+"use client";
+import { useState } from "react";
+import SecretContainer from "./components/mainPage/SecretContainer";
+import PrivacySettings from "./components/mainPage/PrivacySettings";
+import Headtext from "./components/mainPage/Headtext";
 export default function Home() {
-  const [secret, setSecret] = useState('');
+  const [secret, setSecret] = useState("");
   const [status, setStatus] = useState(null);
 
   const handleButtonClick = async (e) => {
-
     e.preventDefault();
-    
+
     alert(`You entered: ${secret}`);
-    const response = await fetch('/api/encrypt', {
-      method: 'POST',
+    const response = await fetch("/api/encrypt", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({ secret }),
     });
 
     const result = await response.json();
     setStatus(result);
-    setSecret('');
+    setSecret("");
   };
 
   return (
-    <div style={{ textAlign: 'center', marginTop: '50px' }}>
-      <h1>Enter Something</h1>
-      <input
-        type="text"
-        value={secret}
-        onChange={(e) => setSecret(e.target.value)}
-        placeholder="Type here"
-        style={{ padding: '10px', width: '300px', marginBottom: '20px' }}
-        required
+    <div style={{ textAlign: "center", marginTop: "50px" }}>
+      <Headtext
+        h1="Enter your Secret key , Credentials , Api keys , Anything"
+        h2="And Get a secure one-time link in return"
       />
-      <br />
-      <button
-        onClick={handleButtonClick}
-        style={{
-          padding: '10px 20px',
-          backgroundColor: '#0070f3',
-          color: 'white',
-          border: 'none',
-          cursor: 'pointer',
-        }}
+
+      <form
+        className="flex flex-col md:flex-row md:items-end
+       justify-between gap-5 mb-5"
       >
-        Submit
-      </button>
+        <SecretContainer
+          value={secret}
+          onChange={(e) => setSecret(e.target.value)}
+          onClick={handleButtonClick}
+        />
+        <PrivacySettings />
+      </form>
+
       {status && (
         <div>
           {status.success ? (
-            <p style={{ color: 'green' }}>{status.link}</p>
+            <p style={{ color: "green" }}>{status.link}</p>
           ) : (
-            <p style={{ color: 'red' }}>{status.message}</p>
+            <p style={{ color: "red" }}>{status.message}</p>
           )}
         </div>
       )}

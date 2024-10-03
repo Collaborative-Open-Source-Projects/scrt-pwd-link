@@ -3,15 +3,23 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #dcedff;
+  --foreground: #343f3e;
+  --primary-color: #0d9488;
+  --input-color: #ffffff;
+  --secondry-input: #cac8c8;
+  --label-color: #454545;
+  --input-text: #1c1c1c;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.dark-theme {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+  --primary-color: #0d9488;
+  --input-color: #1c1c1c;
+  --secondry-input: #020202;
+  --label-color: #c4c4c4;
+  --input-text: #dcdcdc;
 }
 
 body {
@@ -25,11 +33,31 @@ body {
     text-wrap: balance;
   }
 }
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   #nav-desktop-view {
     display: none;
   }
 }
 #nav-container {
   box-shadow: 0px 0px 10px black;
+}
+
+.mobile-menu {
+  height: 36px;
+  width: 36px;
+  margin: 0px;
+  background-color: white;
+  position: relative;
+}
+
+.mobile-menu::after {
+  content: "";
+  width: 18px;
+  height: 10px;
+  position: absolute;
+  border: black solid;
+  border-width: 2px 0px 2px 0px;
+  top: 50%;
+  left: 50%;
+  translate: -9px -5px;
 }
