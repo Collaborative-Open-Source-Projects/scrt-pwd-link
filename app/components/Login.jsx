@@ -1,6 +1,10 @@
+"use client";
+
 import { useState } from "react";
+import {useRouter} from "next/navigation";
 
 export const Login = ({ isAlreadyUser, setAlreadyUser }) => {
+	const router = useRouter();
   const [isPassVisible, setPassVisible] = useState(false);
 	const [errMsg, setErrMsg] = useState("");
 	const [formData, setFormData] = useState({
@@ -37,6 +41,7 @@ export const Login = ({ isAlreadyUser, setAlreadyUser }) => {
 			if(!data.success) return setErrMsg(data.msg);
 
 			localStorage.setItem("token", data.token);
+			router.push("/dashboard");
 		}
 		catch(err){
 			console.log(err);

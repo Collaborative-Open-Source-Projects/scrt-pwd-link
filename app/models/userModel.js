@@ -4,7 +4,7 @@ export async function addUserModel(doc){
 	try{
 		const client = await clientPromise;
 	
-		const userColl = client.db("scrt-pwd-link").collection("user");
+		const userColl = client.db("scrt-pwd-data").collection("users");
 		
 		const result = await userColl.insertOne(doc);
 		
@@ -20,7 +20,7 @@ export async function getUserModel(query){
 	try{
 		const client = await clientPromise;
 
-		const userColl = client.db("scrt-pwd-link").collection("user");
+		const userColl = client.db("scrt-pwd-data").collection("users");
 
 		const user = await userColl.findOne(query);
 

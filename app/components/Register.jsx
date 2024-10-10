@@ -1,7 +1,10 @@
 "use client";
+
 import { useState } from "react";
+import {useRouter} from "next/navigation";
 
 export const Register = ({ isAlreadyUser, setAlreadyUser }) => {
+	const router = useRouter();
   const [isPassVisible, setPassVisible] = useState(false);
   const [isCnfmPassVisible, setCnfmPassVisible] = useState(false);
 	const [errMsg, setErrMsg] = useState("");
@@ -38,6 +41,8 @@ export const Register = ({ isAlreadyUser, setAlreadyUser }) => {
 			const data = await response.json();
 
 			if(!data.success) return setErrMsg(data.msg);
+
+			router.push("/dashboard");
 		}
 		catch(err){
 			console.log(err);

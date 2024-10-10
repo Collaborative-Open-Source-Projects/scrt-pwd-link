@@ -1,4 +1,5 @@
 import {addUserModel, getUserModel} from "@/app/models/userModel";
+import bcrypt from "bcrypt";
 
 
 export default function addUser(req, res) {
@@ -39,10 +40,11 @@ async function handleRequest(param){
 
 	//add user to db
 	try{
+		const hashedPassword = await bcrypt.hash(req.body.password, 10);
 		const doc = {
 			username: req.body.username,
 			emailAddress: req.body.emailAddress,
-			password: req.body.password
+			password: hashedPassword
 		};
 
 		const result = await addUserModel(doc);
