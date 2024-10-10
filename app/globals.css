@@ -61,3 +61,7 @@ body {
   left: 50%;
   translate: -9px -5px;
 }
+
+.err-msg {
+	color: red;
+}

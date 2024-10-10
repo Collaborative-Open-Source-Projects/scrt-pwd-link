@@ -1,14 +1,60 @@
+"use client";
+
 import { useState } from "react";
+import {useRouter} from "next/navigation";
 
 export const Register = ({ isAlreadyUser, setAlreadyUser }) => {
+	const router = useRouter();
   const [isPassVisible, setPassVisible] = useState(false);
   const [isCnfmPassVisible, setCnfmPassVisible] = useState(false);
-  return (
+	const [errMsg, setErrMsg] = useState("");
+	const [formData, setFormData] = useState({
+		username: "",
+		emailAddress: "",
+		password: ""
+	});
+
+	function handleInputChange(event){
+		const {name, value} = event.target;
+
+		setFormData((prevData) => ({
+			...prevData,
+			[name]: value
+		}));
+
+		setErrMsg("");
+	};
+
+	async function signUp(e){
+		e.preventDefault();
+
+		const options = {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify(formData)
+		}
+
+		try{
+			const response = await fetch("/api/add-user", options);
+			const data = await response.json();
+
+			if(!data.success) return setErrMsg(data.msg);
+
+			router.push("/dashboard");
+		}
+		catch(err){
+			console.log(err);
+		}
+	}
+
+	return (
     <div className="m-auto  w-[90%] h-[600px] mt-[8vh] sm:w-[60%] max-w-[500px] justify-center rounded md:w-[50%] lg:w-[40%] 2xl:[20%] flex flex-col border-solid  border-gray-300 bg-white/10  border-[2px] box-border  items-center">
       <h1 className="text-4xl  mb-[6%] " id="company-name">
         Company Name
       </h1>
-      <form className="flex flex-col items-center w-[70%] sm:w-[60%] my-2  mx-auto">
+      <form className="flex flex-col items-center w-[70%] sm:w-[60%] my-2  mx-auto" onSubmit={signUp}>
         <label htmlFor="emailAddress">
           Email address
           <div className="rounded relative w-[296px]  [2px] my-1 focus-within:bg-white p-2 flex bg-gray-100 items-center">
@@ -21,6 +67,7 @@ export const Register = ({ isAlreadyUser, setAlreadyUser }) => {
               id="emailAddress"
               required
               autoComplete="off"
+				onChange={handleInputChange}
             />
           </div>
         </label>
@@ -35,6 +82,7 @@ export const Register = ({ isAlreadyUser, setAlreadyUser }) => {
               name="username"
               id="userName"
               autoComplete="off"
+				onChange={handleInputChange}
             />
             <span className="text-teal-600 cursor-pointer "> CHECK</span>
           </div>
@@ -51,6 +99,7 @@ export const Register = ({ isAlreadyUser, setAlreadyUser }) => {
               name="password"
               id="password"
               autoComplete="off"
+				onChange={handleInputChange}
             />
             <span
               className="cursor-pointer text-teal-600 "
@@ -71,6 +120,7 @@ export const Register = ({ isAlreadyUser, setAlreadyUser }) => {
               name="cnfmPassword"
               id="cnfmPassword"
               autoComplete="off"
+				onChange={handleInputChange}
             />
             <span
               className="cursor-pointer text-teal-600 "
@@ -80,6 +130,13 @@ export const Register = ({ isAlreadyUser, setAlreadyUser }) => {
             </span>
           </div>
         </label>
+
+		{
+			errMsg && (
+				<div className="err-msg">{errMsg}</div>
+			) 
+		}
+
         <input
           type="submit"
           value={"Sign Up"}
