@@ -40,7 +40,7 @@ export default function Input({
           onChange={(e) => onChange(e)}
           placeholder={placeholder}
           className={`${islarge ? "h-28" : "w-3/4"} 
-            w-full shadow-xl bg-[color:var(--input-color)]  appearance-none  rounded-lg  py-2 ps-3 text-[color:var(--input-text:#1c1c1c)] leading-tight focus:outline-none focus:shadow-outline`}
+            w-full shadow-xl bg-[color:var(--input-color)] min-h-9  appearance-none  rounded-lg  py-2 ps-3 text-[color:var(--input-text:#1c1c1c)] leading-tight focus:outline-none focus:shadow-outline`}
           {...props}
         />
       ) : (
