@@ -1,59 +1,61 @@
 "use client";
-
+import Link from "next/link";
 import { useState } from "react";
-import {useRouter} from "next/navigation";
+import { useRouter } from "next/navigation";
 
-export const Login = ({ isAlreadyUser, setAlreadyUser }) => {
-	const router = useRouter();
+export const Login = () => {
+  const router = useRouter();
   const [isPassVisible, setPassVisible] = useState(false);
-	const [errMsg, setErrMsg] = useState("");
-	const [formData, setFormData] = useState({
-		nameOrEmail: "",
-		password: ""
-	});
+  const [errMsg, setErrMsg] = useState("");
+  const [formData, setFormData] = useState({
+    nameOrEmail: "",
+    password: "",
+  });
 
-	function handleInputChange(event){
-		const {name, value} = event.target;
+  function handleInputChange(event) {
+    const { name, value } = event.target;
 
-		setFormData((prevData) => ({
-			...prevData,
-			[name]: value
-		}));
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
 
-		setErrMsg("");
-	};
+    setErrMsg("");
+  }
 
-	async function signIn(e){
-		e.preventDefault();
+  async function signIn(e) {
+    e.preventDefault();
 
-		const options = {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json"
-			},
-			body: JSON.stringify(formData)
-		}
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    };
 
-		try{
-			const response = await fetch("/api/sign-in", options);
-			const data = await response.json();
+    try {
+      const response = await fetch("/api/sign-in", options);
+      const data = await response.json();
 
-			if(!data.success) return setErrMsg(data.msg);
+      if (!data.success) return setErrMsg(data.msg);
 
-			localStorage.setItem("token", data.token);
-			router.push("/dashboard");
-		}
-		catch(err){
-			console.log(err);
-		}
-	}
+      localStorage.setItem("token", data.token);
+      router.push("/dashboard");
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   return (
     <div className="m-auto  w-[90%] h-[600px] mt-[8vh] sm:w-[60%] max-w-[500px] justify-center rounded md:w-[50%] lg:w-[40%] 2xl:[20%] flex flex-col border-solid  border-gray-300 bg-white/10  border-[2px] box-border  items-center">
       <h1 className="text-4xl  mb-[6%] " id="company-name">
         Company Name
       </h1>
-      <form className="flex flex-col items-center w-[70%] sm:w-[60%] my-2  mx-auto" onSubmit={signIn}>
+      <form
+        className="flex flex-col items-center w-[70%] sm:w-[60%] my-2  mx-auto"
+        onSubmit={signIn}
+      >
         <label htmlFor="userName">
           Username or Email address
           <div className="rounded relative w-[296px]  [2px] my-1 focus-within:bg-white p-2 flex bg-gray-100 items-center">
@@ -65,7 +67,7 @@ export const Login = ({ isAlreadyUser, setAlreadyUser }) => {
               name="nameOrEmail"
               id="userName"
               autoComplete="on"
-	  			onChange={handleInputChange}
+              onChange={handleInputChange}
             />
           </div>
         </label>
@@ -81,7 +83,7 @@ export const Login = ({ isAlreadyUser, setAlreadyUser }) => {
               name="password"
               id="password"
               autoComplete="on"
-	  			onChange={handleInputChange}
+              onChange={handleInputChange}
             />
             <span
               onClick={() => {
@@ -94,7 +96,7 @@ export const Login = ({ isAlreadyUser, setAlreadyUser }) => {
           </div>
         </label>
 
-	  	{errMsg && (<div className="err-msg">{errMsg}</div>)}
+        {errMsg && <div className="err-msg">{errMsg}</div>}
 
         <input
           type="submit"
@@ -104,12 +106,9 @@ export const Login = ({ isAlreadyUser, setAlreadyUser }) => {
       </form>
       <div>
         Don&apos;t have an account?
-        <button
-          className="text-blue-500 ml-2"
-          onClick={() => setAlreadyUser(!isAlreadyUser)}
-        >
-          Sign up
-        </button>
+        <Link href={"/register"}>
+          <button className="text-blue-500 ml-2">Sign up</button>
+        </Link>
       </div>
     </div>
   );
