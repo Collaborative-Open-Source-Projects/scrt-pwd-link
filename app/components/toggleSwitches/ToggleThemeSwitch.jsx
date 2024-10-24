@@ -1,5 +1,4 @@
 "use client";
-import "./toggleThemeSwitch.css";
 import { useState, useEffect } from "react";
 
 function ToggleThemeSwitch() {
