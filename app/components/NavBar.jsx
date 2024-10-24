@@ -33,12 +33,12 @@ export const NavBar = () => {
           </Link>
         </ul>
         <div className="w-auto ml-auto flex items-center md:space-x-6 space-x-2">
-          <Link href={"/authentication"}>
+          <Link href={"/login"}>
             <button className="box-border px-4 h-[36px]  rounded hover:bg-teal-700 bg-teal-600">
               Login
             </button>
           </Link>
-          <Link href={"/authentication"}>
+          <Link href={"/register"}>
             <button className=" h-[36px] px-4 rounded hidden md:block bg-white hover:bg-white/90 text-teal-600">
               Register
             </button>
