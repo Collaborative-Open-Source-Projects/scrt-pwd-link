@@ -3,6 +3,7 @@ import { useState } from "react";
 import SecretContainer from "./components/mainPage/SecretContainer";
 import PrivacySettings from "./components/mainPage/PrivacySettings";
 import Headtext from "./components/mainPage/Headtext";
+
 export default function Home() {
   const [secret, setSecret] = useState("");
   const [status, setStatus] = useState(null);

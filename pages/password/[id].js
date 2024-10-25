@@ -1,5 +1,6 @@
 import clientPromise from "@/app/lib/mongodb";
 import { decrypt } from "@/app/utils/decrpyt";
+
 export async function getServerSideProps({ params }) {
   const { id } = params;
 
@@ -28,7 +29,6 @@ export async function getServerSideProps({ params }) {
       },
     };
   }
-
 
   return {
     props: {

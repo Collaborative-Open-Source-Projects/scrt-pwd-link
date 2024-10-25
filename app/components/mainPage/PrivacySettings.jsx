@@ -28,6 +28,7 @@ export default function PrivacySettings() {
           width="w-[50px]"
           placeholder="7"
           min={"1"}
+          max={"30"}
           name={"expire"}
         />
         <p>:</p>
