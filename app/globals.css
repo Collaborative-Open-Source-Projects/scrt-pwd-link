@@ -3,13 +3,14 @@
 @tailwind utilities;
 
 :root {
-  --background: #dcedff;
+  --background: rgb(220, 237, 255);
   --foreground: #343f3e;
   --primary-color: #0d9488;
   --input-color: #ffffff;
   --secondry-input: #cac8c8;
   --label-color: #454545;
   --input-text: #1c1c1c;
+  --card-background: #ffffff6e;
 }
 
 .dark-theme {
@@ -20,6 +21,7 @@
   --secondry-input: #020202;
   --label-color: #c4c4c4;
   --input-text: #dcdcdc;
+  --card-background: rgba(220, 237, 255, 0.05);
 }
 
 body {
