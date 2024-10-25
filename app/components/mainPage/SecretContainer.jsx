@@ -1,6 +1,7 @@
 import React from "react";
 import Input from "../ui/Input";
 import Button from "../ui/Button";
+
 export default function SecretContainer({ value, onChange, onClick }) {
   const width = "w-3/4 md:w-3/4 lg:w-3/4 xl:w-2/4 mt-5";
   return (

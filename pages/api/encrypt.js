@@ -1,5 +1,6 @@
 import clientPromise from "@/app/lib/mongodb";
 import { encrypt } from "@/app/utils/encrypt";
+import { date_to_ms } from "@/app/utils/date_to_ms";
 import { v4 as uuidv4 } from 'uuid';
 
 export default async function handler(req, res) {
@@ -7,10 +8,10 @@ export default async function handler(req, res) {
     const db = client.db('scrt-pwd-data');
     const collection = db.collection('scrt-pwd-data');
 
-
     if (req.method === 'POST') {
         try {
-            const { secret } = req.body;
+            const { secret, formData } = req.body;
+            const { expiry, expiryType } = formData;
             const id = uuidv4();
 
             if (!secret) {
@@ -18,9 +19,8 @@ export default async function handler(req, res) {
             }
 
             const encryptedSecret = encrypt(secret);
-            const expirationTime = 7 * 24 * 60 * 60 * 1000;
             const createdAt = new Date();
-            const expiresAt = new Date(createdAt.getTime() + expirationTime);
+            const expiresAt = new Date(createdAt.getTime() + date_to_ms(expiry, expiryType));
             const encryptionKey = null;
 
             const secret_store = {
