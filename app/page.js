@@ -3,20 +3,25 @@ import { useState } from "react";
 import SecretContainer from "./components/mainPage/SecretContainer";
 import PrivacySettings from "./components/mainPage/PrivacySettings";
 import Headtext from "./components/mainPage/Headtext";
+
 export default function Home() {
   const [secret, setSecret] = useState("");
   const [status, setStatus] = useState(null);
+  const [formData, setFormData] = useState({});
+
+  const handleChanges = ({expiry, expiryType}) => {
+    setFormData(prev => ({ ...prev, expiry, expiryType }));
+  }
 
   const handleButtonClick = async (e) => {
     e.preventDefault();
 
-    alert(`You entered: ${secret}`);
     const response = await fetch("/api/encrypt", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ secret }),
+      body: JSON.stringify({ secret, formData }),
     });
 
     const result = await response.json();
@@ -41,7 +46,9 @@ export default function Home() {
           onChange={(e) => setSecret(e.target.value)}
           onClick={handleButtonClick}
         />
-        <PrivacySettings />
+        <PrivacySettings 
+          onExpireChange={handleChanges}
+        />
       </form>
 
       {status && (
