@@ -5,8 +5,22 @@ import Dropmenu from "../ui/Dropmenu";
 import Input from "../ui/Input";
 import Button from "../ui/Button";
 
-export default function PrivacySettings() {
+export default function PrivacySettings({ onExpireChange }) {
   const [isUnlimited, setIsUnlimited] = useState(false);
+  const [expiry, setExpiry] = useState("");
+  const [expiryType, setExpiryType] = useState("Days"); 
+
+  const handleExpireChange = (e) => {
+    const newExpiry = e.target.value;
+    setExpiry(newExpiry);
+    onExpireChange({expiry: newExpiry, expiryType});
+  }
+
+  const handleChanges = (newExpiryType) => {
+    setExpiryType(newExpiryType);
+    onExpireChange({expiry, expiryType: newExpiryType});
+  }
+
   return (
     <div className="flex flex-col items-center md:items-start gap-3 w-full md:basis-1/2">
       <h2 className="text-3xl font-bold">Privacy Settings</h2>
@@ -29,13 +43,17 @@ export default function PrivacySettings() {
           placeholder="7"
           min={"1"}
           max={"30"}
-          name={"expire"}
+          name={"expiry"}
+          value={expiry}
+          onChange={handleExpireChange}
         />
         <p>:</p>
         <Dropmenu
           options={["Hours", "Days", "Weeks", "Months", "Years"]}
-          selectedVaue={"Day"}
-          name="expireType"
+          selectedVaue={expiryType}
+          value={expiryType}
+          onSelect={(e) => handleChanges(e)}
+          name={"expiryType"}
           width="w-2/4"
         />
       </div>
