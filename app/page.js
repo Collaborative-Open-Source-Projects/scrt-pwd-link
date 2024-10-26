@@ -37,6 +37,7 @@ export default function Home() {
       />
 
       <form
+        method="POST"
         className="flex flex-col md:flex-row md:items-end
        justify-between gap-5 mb-5"
       >
