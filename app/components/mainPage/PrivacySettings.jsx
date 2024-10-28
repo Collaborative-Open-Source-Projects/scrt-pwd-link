@@ -81,7 +81,6 @@ export default function PrivacySettings({ onExpireChange }) {
       <p className="font-bold text-gray-500 text-start ps-4">
         *Please enter value between 1 - 100 view*
       </p>
-      <CheckBox name="decryption" label="Decryption Key" />
       <Button type="submit">Save Settings AS Default</Button>
     </div>
   );
