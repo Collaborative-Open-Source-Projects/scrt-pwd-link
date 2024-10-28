@@ -16,6 +16,7 @@ export default function Dropmenu({
   SelectedValue = "Select",
   width = "w-[120px]",
   name = "dropmenu",
+  isDisabled,
 }) {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(SelectedValue);
@@ -28,9 +29,11 @@ export default function Dropmenu({
   }
   return (
     <div className={`${width} inline-block relative  `}>
-      <button
+      <div
         onClick={() => setOpen((prev) => !prev)}
-        className=" bg-[color:var(--input-color)] shadow-xl text-start h-10 rounded-md w-full relative text-gray-500  py-2 px-2   "
+        className={` bg-[color:var(--input-color)] ${
+          isDisabled ? "cursor-none" : "cursor-pointerl"
+        } shadow-xl text-start h-10  w-full  rounded-md  relative text-gray-500  py-2 px-2`}
       >
         {value}
         <Image
@@ -40,7 +43,7 @@ export default function Dropmenu({
           height={15}
           className="absolute right-2 top-1/2 transform -translate-y-1/2"
         />
-      </button>
+      </div>
       <ul
         className={`${
           open ? "block" : "hidden"
