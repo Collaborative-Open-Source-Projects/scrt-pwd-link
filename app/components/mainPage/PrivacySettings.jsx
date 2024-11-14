@@ -25,10 +25,10 @@ export default function PrivacySettings({ onExpireChange }) {
     <div className="flex flex-col items-center md:items-start gap-3 w-full md:basis-1/2">
       <h2 className="text-3xl font-bold">Privacy Settings</h2>
       <div className="flex items-center gap-1  sm:gap-2 lg:w-3/5 md:w-4/5 w-11/12 min-[450px]:w-8/12">
-        <p className="font-bold">Passphrasse:</p>
+        <p className="font-bold">Decryption key:</p>
         <Input
           width="flex-1 max-w-3/4"
-          placeholder="Enter Passphrase"
+          placeholder="Enter Decryption Key"
           name={"passphrase"}
         />
       </div>
@@ -42,6 +42,7 @@ export default function PrivacySettings({ onExpireChange }) {
           width="w-[50px]"
           placeholder="7"
           min={"1"}
+          isDisabled={isUnlimited}
           max={"30"}
           name={"expiry"}
           value={expiry}
@@ -49,6 +50,7 @@ export default function PrivacySettings({ onExpireChange }) {
         />
         <p>:</p>
         <Dropmenu
+          isDisabled={isUnlimited}
           options={["Hours", "Days", "Weeks", "Months", "Years"]}
           selectedVaue={expiryType}
           value={expiryType}
@@ -79,7 +81,6 @@ export default function PrivacySettings({ onExpireChange }) {
       <p className="font-bold text-gray-500 text-start ps-4">
         *Please enter value between 1 - 100 view*
       </p>
-      <CheckBox name="decryption" label="Decryption Key" />
       <Button type="submit">Save Settings AS Default</Button>
     </div>
   );
