@@ -39,8 +39,9 @@ export const Login = () => {
       const data = await response.json();
 
       if (!data.success) return setErrMsg(data.msg);
-
-      localStorage.setItem("token", data.token);
+      document.cookie = `token=${
+        data.token
+      };SameSite=None; Secure; path=/; max-age=${3600 * 24 * 31}; `;
       router.push("/dashboard");
     } catch (err) {
       console.log(err);
