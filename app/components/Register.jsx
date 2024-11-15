@@ -41,7 +41,12 @@ export const Register = () => {
       const data = await response.json();
 
       if (!data.success) return setErrMsg(data.msg);
-
+      if (data.token) {
+        document.cookie = `token=${
+          data.token
+        };SameSite=None; Secure; path=/; max-age=${3600 * 24 * 31}; `;
+      }
+      console.log(data);
       router.push("/dashboard");
     } catch (err) {
       console.log(err);
